@@ -1,0 +1,6 @@
+framework module Pods_TryonTests {
+  umbrella header "Pods-TryonTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
