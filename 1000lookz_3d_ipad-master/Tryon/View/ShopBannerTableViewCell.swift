@@ -77,6 +77,8 @@ class ShopBannerTableViewCell: UITableViewCell {
         exploreView.layer.shouldRasterize = true
         exploreView.layer.rasterizationScale = UIScreen.main.scale
         
+        imageSlideShowView.addShadowViews()
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
         imageSlideShowView.addGestureRecognizer(gestureRecognizer)
     }
