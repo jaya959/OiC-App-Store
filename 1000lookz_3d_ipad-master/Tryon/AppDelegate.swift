@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getDocDir() -> String {
-        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
     }
 }
 

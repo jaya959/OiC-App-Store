@@ -421,6 +421,11 @@ class TrayController: BaseViewController , EPSignatureDelegate {
                     }
                 }
                 
+                if calcPriceText == nil {
+                    calcPriceText = "0"
+                    //cell.priceMultiByQuantityLabel.text = calcPriceText
+                }
+                
                 var dat = self?.itemAdded[i]
                 dat?.updateValue(calcPriceText!, forKey: "Subtotal")
                 self?.itemAdded[i] = dat!
@@ -575,6 +580,19 @@ class TrayController: BaseViewController , EPSignatureDelegate {
             let modelItem: String = frame.productName! + " " + frame.modelNumber!
             let index = String(i+1)
             let quantity = String(frame.orderQuantityCount)
+            
+            if  calcPriceText == nil {
+                
+                calcPriceText = "0"
+                
+            }
+            
+            if  priceText == nil {
+                
+                priceText = "0"
+                
+            }
+            
             Val = ["S.No":index,
                      "Item":modelItem,
                      "Price":priceText,
@@ -1083,6 +1101,28 @@ extension UIView {
         
         shadowView.layer.shadowOpacity = 0.5
         shadowView.layer.shadowRadius = 7
+        shadowView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        shadowView.layer.rasterizationScale = UIScreen.main.scale
+        shadowView.layer.shouldRasterize = true
+        
+        superview?.insertSubview(shadowView, belowSubview: self)
+    }
+}
+
+extension UIView {
+    func addShadowViews() {
+        //Remove previous shadow views
+        superview?.viewWithTag(119900)?.removeFromSuperview()
+        
+        //Create new shadow view with frame
+        let shadowView = UIView(frame: frame)
+        shadowView.tag = 119900
+        shadowView.layer.shadowColor = UIColor.lightGray.cgColor
+        shadowView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        shadowView.layer.masksToBounds = false
+        
+        shadowView.layer.shadowOpacity = 0.6
+        shadowView.layer.shadowRadius = 6.0
         shadowView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         shadowView.layer.rasterizationScale = UIScreen.main.scale
         shadowView.layer.shouldRasterize = true

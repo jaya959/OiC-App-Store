@@ -14,7 +14,7 @@ class FileHelper: NSObject {
     
     //MARK: - File Helper functions
     func getDocumentDirectoryPath() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
         
         return documentsDirectory
@@ -35,7 +35,7 @@ class FileHelper: NSObject {
             return nil
         }
         
-        let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(fileName)
+        let path = (NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(fileName)
         let json = JSON(dictionary)
         let jsonString = json.rawString()
 

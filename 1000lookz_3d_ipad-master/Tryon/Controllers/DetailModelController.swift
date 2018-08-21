@@ -399,7 +399,7 @@ class DetailModelController: BaseViewController {
                 //                }else{
                 
                 DispatchQueue.global(qos: .userInitiated).sync {
-                    self.tryon3D.getRender3D(forUser: self.user!, shouldRenderWithUserImage: false, frame: self.frame!, inDirectory: .documentDirectory, completionHandler: { (render3D) in
+                    self.tryon3D.getRender3D(forUser: self.user!, shouldRenderWithUserImage: false, frame: self.frame!, inDirectory: .libraryDirectory, completionHandler: { (render3D) in
                         if render3D?.status == .isCompleted {
                             //Add User images
                             var userImageIdentifiers: [String] = []
@@ -962,7 +962,7 @@ class DetailModelController: BaseViewController {
                         
                     }else{
                         
-                        let alert = UIAlertController(title:"lookzId NOT WORK" , message: lookzId, preferredStyle: UIAlertControllerStyle.alert);
+                        let alert = UIAlertController(title:"No Model Preview Available" , message: "", preferredStyle: UIAlertControllerStyle.alert);
                         
                         let alertAction = UIAlertAction(title: "ok", style: .cancel) { (alert) in
                             self.dismiss(animated: true, completion: nil)
@@ -972,7 +972,7 @@ class DetailModelController: BaseViewController {
                         
                         self.present(alert, animated: true, completion: nil)
                         
-                        print(lookzId,"not there")
+                        print(lookzId,"Not there")
                     }
                     
                     break
@@ -1180,7 +1180,7 @@ class DetailModelController: BaseViewController {
                         
                     }else{
                         
-                        let alert = UIAlertController(title:"lookzId NOT WORK" , message: lookzId, preferredStyle: UIAlertControllerStyle.alert);
+                        let alert = UIAlertController(title:"No Model Preview Available" , message: "", preferredStyle: UIAlertControllerStyle.alert);
                         
                         let alertAction = UIAlertAction(title: "ok", style: .cancel) { (alert) in
                             self.dismiss(animated: true, completion: nil)
@@ -1191,9 +1191,7 @@ class DetailModelController: BaseViewController {
                         self.present(alert, animated: true, completion: nil)
                         
                     }
-                    
-                    
-                    
+             
                     break
                     
                 case .failure(let error):

@@ -110,7 +110,7 @@ public class SBPlatformDestination: BaseDestination {
         #else
             #if os(tvOS)
                 // tvOS can just use the caches directory
-                if let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+                if let url = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
                     baseURL = url
                 }
             #elseif os(Linux)
@@ -121,7 +121,7 @@ public class SBPlatformDestination: BaseDestination {
                 analyticsFileURL = URL(fileURLWithPath: baseDir + analyticsFileName)
             #else
                 // iOS and watchOS are using the app’s document directory
-                if let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+                if let url = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first {
                     baseURL = url
                 }
             #endif

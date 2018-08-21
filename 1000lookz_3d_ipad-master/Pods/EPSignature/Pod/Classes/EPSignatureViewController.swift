@@ -103,7 +103,7 @@ open class EPSignatureViewController: UIViewController {
     func onTouchDoneButton() {
         if let signature = signatureView.getSignatureAsImage() {
             if switchSaveSignature.isOn {
-                let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+                let docPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
                 let filePath = (docPath! as NSString).appendingPathComponent("sig.data")
                 signatureView.saveSignature(filePath)
             }
@@ -119,7 +119,7 @@ open class EPSignatureViewController: UIViewController {
         action.view.tintColor = tintColor
         
         action.addAction(UIAlertAction(title: "Load default signature", style: UIAlertActionStyle.default, handler: { action in
-            let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+            let docPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
             let filePath = (docPath! as NSString).appendingPathComponent("sig.data")
             self.signatureView.loadSignature(filePath)
         }))

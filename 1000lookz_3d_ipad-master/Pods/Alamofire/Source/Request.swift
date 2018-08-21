@@ -536,12 +536,12 @@ open class DownloadRequest: Request {
     ///
     /// - returns: A download file destination closure.
     open class func suggestedDownloadDestination(
-        for directory: FileManager.SearchPathDirectory = .documentDirectory,
+        for directory: FileManager.SearchPathDirectory = .libraryDirectory,
         in domain: FileManager.SearchPathDomainMask = .userDomainMask)
         -> DownloadFileDestination
     {
         return { temporaryURL, response in
-            let directoryURLs = FileManager.default.urls(for: directory, in: domain)
+            let directoryURLs = FileManager.default.urls(for: .applicationSupportDirectory, in: domain)
 
             if !directoryURLs.isEmpty {
                 return (directoryURLs[0].appendingPathComponent(response.suggestedFilename!), [])

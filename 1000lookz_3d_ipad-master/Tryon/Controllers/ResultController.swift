@@ -115,7 +115,7 @@ class ResultController: BaseViewController, DeletableImageViewDelegate{
             collectionModelView.isHidden = false
 
             self.titleLabel.text =  "RESULTS" + " - \(self.inventoryFramesForModelView.count)" + "  Items"
-           // collectionModelView.reloadData()
+    
         }
         else {
             tryonSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.primaryLightColor], for: UIControlState.selected)
@@ -224,18 +224,20 @@ class ResultController: BaseViewController, DeletableImageViewDelegate{
                 let inventory  =  self.inventoryFramesForModelView[0]
                 
                 if let image = CacheHelper().image(withIdentifier: inventory.lookzId! + ypr, in: "jpg"){
-
+                    
                     print(image)
                     collectionModelView.reloadData()
-
+                    
                 }else{
                     LastApiImage(image: images, lookId: inventory.lookzId!)
-
+                    
                 }
-               // }
+                // }
                 
             }
         }
+        
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -363,8 +365,8 @@ class ResultController: BaseViewController, DeletableImageViewDelegate{
     
     func LastApiImage(image : UIImage , lookId: String){
         
-        alert = UIAlertController(title: "Uploading", message: "Please wait! \n\n", preferredStyle: UIAlertControllerStyle.alert)
-        self.present(alert, animated: true, completion: nil)
+//        alert = UIAlertController(title: "Uploading", message: "Please wait! \n\n", preferredStyle: UIAlertControllerStyle.alert)
+//        self.present(alert, animated: true, completion: nil)
         
         
         Alamofire.upload(multipartFormData:
@@ -484,9 +486,6 @@ class ResultController: BaseViewController, DeletableImageViewDelegate{
             if self.finalImagesArray.count == self.inventoryFramesForModelView.count{
                 
                 self.collectionModelView.reloadData()
-                
-                self.alert.dismiss(animated: true, completion: nil)
-
  
                 print("completed")
                 
@@ -537,7 +536,28 @@ class ResultController: BaseViewController, DeletableImageViewDelegate{
         
          let inventory  =  self.inventoryFramesForModelView[index]
         
-        self.lastApi(id:imageId,lookzId: inventory.lookzId!)
+        if finalImagesArray.count == 9 {
+            
+            self.lastApi(id:imageId,lookzId: inventory.lookzId!)
+            
+            collectionModelView.reloadData()
+        } else if finalImagesArray.count == 18 {
+            
+            self.lastApi(id:imageId,lookzId: inventory.lookzId!)
+            
+            collectionModelView.reloadData()
+        } else if finalImagesArray.count == 27 {
+            
+            self.lastApi(id:imageId,lookzId: inventory.lookzId!)
+            
+            collectionModelView.reloadData()
+        }else{
+            
+            self.lastApi(id:imageId,lookzId: inventory.lookzId!)
+            
+            collectionModelView.reloadData()
+        }
+        
         
     }
     
@@ -549,7 +569,26 @@ extension ResultController: UICollectionViewDataSource, UICollectionViewDelegate
             return self.inventoryFrames.count
         }
         else {
-            return self.inventoryFramesForModelView.count
+            
+            
+            if UserDefaults.standard.string(forKey: "UsersKey") != nil{
+                
+                if finalImagesArray.count == 0 {
+                    
+                   return inventoryFramesForModelView.count
+                    
+                }else{
+                    
+                    return self.finalImagesArray.count
+                }
+                
+            }else{
+               
+                return inventoryFramesForModelView.count
+                
+            }
+            
+            
         }
     }
     
@@ -657,18 +696,14 @@ extension ResultController: UICollectionViewDataSource, UICollectionViewDelegate
                     
                     print(url!)
                     
-//                    if let image = CacheHelper().image(withIdentifier: inventoryFrame.lookzId!, in: "jpg"){
-//
-//
-//                        cell?.imageView.image = image
-//
-//                    }else{
+                     if finalImagesArray.count >= 9 {
+                        
                         cell?.imageView.image = finalImagesArray[indexPath.row]
                         
                         CacheHelper().add(finalImagesArray[indexPath.row], withIdentifier:  inventoryFrame.lookzId! + ypr, in: "jpg")
-                   // }
-                 
-                   
+                        
+                    }
+              
                     
                 }
               }

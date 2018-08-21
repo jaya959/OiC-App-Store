@@ -391,7 +391,7 @@ NSString *RLMDefaultDirectoryForBundleIdentifier(NSString *bundleIdentifier) {
 #elif TARGET_OS_IPHONE
     (void)bundleIdentifier;
     // On iOS the Documents directory isn't user-visible, so put files there
-    return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    return NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 #else
     // On OS X it is, so put files in Application Support. If we aren't running
     // in a sandbox, put it in a subdirectory based on the bundle identifier

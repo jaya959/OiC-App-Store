@@ -173,7 +173,7 @@ open class EPSignatureView: UIView {
     }
     
     func removeSignature() {
-        let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        let docPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
         let filePath = (docPath! as NSString).appendingPathComponent("sig.data")
         do {
             try FileManager.default.removeItem(atPath: filePath)
